@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: eureka-server
+  # Uzak Config Server'dan ayarların yüklenmesi için import tanımı
+  config:
+    import: "configserver:http://localhost:8888"
+  cloud:
+    config:
+      # Config Server'ın native profili kullandığını belirtir
+      profile: native

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: product-service
+
+  # Uzak Config Server konfigürasyonunu import etmek için:
+  config:
+    import: "configserver:http://localhost:8888"
+
+  cloud:
+    config:
+      # Config Server'in native (yerel dosya sistemi) backend kullanacağını belirtir
+      profile: native
