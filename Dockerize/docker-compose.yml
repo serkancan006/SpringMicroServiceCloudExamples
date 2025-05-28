@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: mssql
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=123456Aa*
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    command: start-dev
+    ports:
+      - "8090:8080"
+    depends_on:
+      - mssql
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+#    eureka ya kayıt olması istenilirse envireonment geçildikten sonra ilgili microservislerin configleride güncellenmelidir eureka üzerinden bulması gerek
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=eureka
+#      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+#      - EUREKA_INSTANCE_PREFERIPADDRESS=true
+#      - EUREKA_INSTANCE_HOSTNAME=zipkin
+#      - SPRING_APPLICATION_NAME=zipkin-server
+
+volumes:
+  mssql_data:
+  keycloak_data:
+
+networks:
+  default:
+    driver: bridge
