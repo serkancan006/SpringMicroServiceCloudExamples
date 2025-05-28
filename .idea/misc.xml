@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/ConfigServer/pom.xml" />
         <option value="$PROJECT_DIR$/EurakaServer/pom.xml" />
         <option value="$PROJECT_DIR$/ProductService/pom.xml" />
+        <option value="$PROJECT_DIR$/admin-server/pom.xml" />
       </list>
     </option>
   </component>

@@ -1,6 +1,17 @@
 server:
   port: 8080
 
+  boot:
+    admin:
+      client:
+        url: ${SPRING_BOOT_ADMIN_SERVER_URL:http://localhost:8508}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
 spring:
   application:
     name: api-gateway
@@ -23,4 +34,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+
 
